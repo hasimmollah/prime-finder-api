@@ -35,7 +35,7 @@ public class PrimeFinderControllerAdvice {
                                                          MethodArgumentTypeMismatchException ex) {
         ErrorResponse error = new ErrorResponse(
                 ErrorCodes.METHOD_ARGUMENT_MISMATCH_EXCEPTION.getCode(),
-                ErrorCodes.METHOD_ARGUMENT_MISMATCH_EXCEPTION.getDescription() + ": " + ex.getMessage());
+                ErrorCodes.METHOD_ARGUMENT_MISMATCH_EXCEPTION.getDescription() + " for  " + ex.getName() + ", value : " + ex.getValue());
         log.error(ex.getMessage(), ex);
         return new ResponseEntity<>(
                 error,
