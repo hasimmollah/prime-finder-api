@@ -1,17 +1,13 @@
 spring:
   profiles:
-    default: development
-    active: development 
+    default: IntegrationTest
+    active: IntegrationTest
 
 ---
 
 spring:
   profiles: development
-  mvc:
-    async:
-      request-timeout: -1
-
-
+  
 security:
   basic:
     enabled: false

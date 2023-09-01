@@ -66,6 +66,16 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.7.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -154,6 +164,24 @@
 				<configuration>
 					<source>9</source>
 					<target>9</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.20.1</version>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+					<systemPropertyVariables>
+						<applicationLogDir>${project.build.directory}/logs</applicationLogDir>
+						<logFilePrefix>log</logFilePrefix>
+						<consoleLogLevel>INFO</consoleLogLevel>
+						<fileLogLevel>INFO</fileLogLevel>
+						<applicationLogLevel>INFO</applicationLogLevel>
+						<rootLogLevel>WARN</rootLogLevel>
+						<logImmediateFlush>true</logImmediateFlush> <!-- only set to true to ensure unit tests immediately see logs -->
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 

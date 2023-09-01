@@ -19,20 +19,18 @@ import javax.servlet.http.HttpServletRequest;
 public class PrimeFinderControllerAdvice {
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(HttpServletRequest request,
-                                                         Exception ex) {
+    public ResponseEntity<ErrorResponse> handleException(Exception ex) {
         ErrorResponse error = new ErrorResponse(
                 ErrorCodes.APPLICATION_EXCEPTION.getCode(),
                 ErrorCodes.APPLICATION_EXCEPTION.getDescription());
         log.error(ex.getMessage(), ex);
-        return new ResponseEntity<ErrorResponse>(
+        return new ResponseEntity(
                 error,
-                HttpStatus.BAD_REQUEST);
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(HttpServletRequest request,
-                                                         MethodArgumentTypeMismatchException ex) {
+    public ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
         ErrorResponse error = new ErrorResponse(
                 ErrorCodes.METHOD_ARGUMENT_MISMATCH_EXCEPTION.getCode(),
                 ErrorCodes.METHOD_ARGUMENT_MISMATCH_EXCEPTION.getDescription() + " for  " + ex.getName() + ", value : " + ex.getValue());

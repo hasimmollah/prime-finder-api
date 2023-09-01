@@ -18,16 +18,16 @@ public class SquareRootStrategy implements PrimeFinderStrategy {
         log.trace("Started executing getPrimes (request: {} )", request);
         int initial = request.getInitial();
         List<Integer> list = new ArrayList<>();
-        boolean flag ;
+        boolean isPrime ;
         for (int i = 2; i <= initial; i++) {
-            flag = true;
+            isPrime = true;
             for (int j = 2; j * j <= i; j++) {
                 if (i % j == 0) {
-                    flag = false;
+                    isPrime = false;
                     break;
                 }
             }
-            if(flag){
+            if(isPrime){
                 list.add(i);
             }
         }

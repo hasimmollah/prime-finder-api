@@ -28,13 +28,13 @@ public class BruteForceStrategy implements PrimeFinderStrategy {
     }
 
     private boolean isPrime(int n){
-        boolean flag = true;
+        boolean isPrime = true;
         for(int i = 2; i<= n/2; i++){
             if(n%i ==0){
-                flag = false;
+                isPrime = false;
                 break;
             }
         }
-        return flag;
+        return isPrime;
     }
 }
