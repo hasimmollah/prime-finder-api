@@ -45,9 +45,15 @@ server:
 server:
       contextPath: /prime-finder-api/v1.0
 
-request:
-  executor:
-    threadpool:
-      coreSize: 20
-      maxSize: 50
-      queueCapacity: 20
+
+
+executor:
+  threadpool:
+    request:
+      coreSize: 50
+      maxSize: 70
+      queueSize: 100
+    primes:
+      coreSize: 50
+      maxSize: 70
+      queueSize: 100

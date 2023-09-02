@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.nw.primefinder.service.PrimeFinderService;
@@ -24,7 +25,7 @@ public class PrimeFinderController {
     PrimeFinderService primeFinderService;
     @Qualifier(REQUEST_TASK_EXECUTOR)
     @Autowired
-    private ConcurrentTaskExecutor requestTaskExecutor;
+    private ThreadPoolTaskExecutor requestTaskExecutor;
 
 
     @RequestMapping(value = "/health", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

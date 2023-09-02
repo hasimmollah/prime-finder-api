@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("IntegrationTest")
-public class PrimeFinderControllerIntegrationTest {
+ class PrimeFinderControllerIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
@@ -51,7 +51,7 @@ public class PrimeFinderControllerIntegrationTest {
                 Arguments.of(initial100, Strategy.BRUTE_FORCE, true, MediaType.APPLICATION_JSON, prepareConsumerForSuccessfulMvcResult(initial100, om,  primesTill100)),
                 Arguments.of(initial1000, Strategy.SQUARE_ROOT, true, MediaType.APPLICATION_JSON, prepareConsumerForSuccessfulMvcResult(initial1000, om,  primesTill1000)),
                 Arguments.of(initial10, Strategy.SIEVE_OF_ERATOSTHENES, true, MediaType.APPLICATION_XML, prepareConsumerForSuccessfulMvcResult(initial10, xmlMapper,  primesTill10)),
-                Arguments.of(initial10 + "<script></script>", Strategy.SIEVE_OF_ERATOSTHENES, true, MediaType.APPLICATION_XML, prepareConsumerForSuccessfulMvcResult(initial10, xmlMapper,  primesTill10)),
+                Arguments.of(initial10 + "/404", Strategy.SIEVE_OF_ERATOSTHENES, false, MediaType.APPLICATION_XML, prepareConsumerFor404Response(404, xmlMapper,  primesTill10)),
                 Arguments.of("12ts", Strategy.SIEVE_OF_ERATOSTHENES, false, MediaType.APPLICATION_JSON, prepareConsumerForErrorResponseMvcResult( om, new ErrorResponse(
                         ErrorCodes.METHOD_ARGUMENT_MISMATCH_EXCEPTION.getCode(),
                         ErrorCodes.METHOD_ARGUMENT_MISMATCH_EXCEPTION.getDescription()))),
@@ -71,6 +71,12 @@ public class PrimeFinderControllerIntegrationTest {
             assertEquals(Integer.valueOf(initial), getPrimeResponseActual.getInitial());
             assertEquals(expectedPrimes.size(), getPrimeResponseActual.getPrimes().size());
             assertTrue(expectedPrimes.containsAll( getPrimeResponseActual.getPrimes()));
+        };
+    }
+
+    private static Consumer<MvcResult> prepareConsumerFor404Response(int httpStatusCode,ObjectMapper om, List<Integer> expectedPrimes){
+        return  (mvcResult) -> {
+            assertEquals(httpStatusCode, mvcResult.getResponse().getStatus());
         };
     }
 

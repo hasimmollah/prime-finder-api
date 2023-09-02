@@ -3,6 +3,7 @@ package com.nw.primefinder.service;
 import com.nw.primefinder.model.GetPrimeRequest;
 import com.nw.primefinder.model.GetPrimeResponse;
 import com.nw.primefinder.model.Strategy;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -11,10 +12,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static com.nw.primefinder.TestUtil.getPrimesTaskExecutor;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PrimeFinderServiceTest {
+ class PrimeFinderServiceTest {
     private PrimeFinderService primeFinderService;
 
     private static Stream<Arguments> testInputProvider() {
@@ -69,11 +71,13 @@ public class PrimeFinderServiceTest {
 
     @BeforeEach
     void setup() {
-        primeFinderService = new PrimeFinderService();
+        primeFinderService = new PrimeFinderService(getPrimesTaskExecutor());
+
     }
 
     @ParameterizedTest
     @MethodSource("testInputProvider")
+    @SneakyThrows
     void shouldTestGetPrimes(GetPrimeRequest request, GetPrimeResponse getPrimeResponseExpected) {
         GetPrimeResponse getPrimeResponseActual = primeFinderService.getPrimes(request);
         assertEquals(getPrimeResponseExpected.getInitial(), getPrimeResponseActual.getInitial());
