@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.nw.primefinder.service.PrimeFinderService;
@@ -25,7 +24,7 @@ public class PrimeFinderController {
     PrimeFinderService primeFinderService;
     @Qualifier(REQUEST_TASK_EXECUTOR)
     @Autowired
-    private ThreadPoolTaskExecutor requestTaskExecutor;
+    private ConcurrentTaskExecutor requestTaskExecutor;
 
 
     @RequestMapping(value = "/health", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -35,7 +34,7 @@ public class PrimeFinderController {
         return "prime finder is up";
     }
 
-    @RequestMapping(value = "/prime/{initial}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @RequestMapping(value = "/primes/{initial}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(OK)
     @ResponseBody
     public CompletableFuture<GetPrimeResponse> getPrimes(@PathVariable int initial, @RequestHeader(required = false, defaultValue = "SIEVE_OF_ERATOSTHENES") Strategy strategy) {

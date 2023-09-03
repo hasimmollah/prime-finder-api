@@ -98,7 +98,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @MethodSource("testInputProvider")
     public void shouldExecuteQueryAndValidateResponse(String initial, Strategy strategy, boolean isSuccessScenario, MediaType mediaType, Consumer<MvcResult> responseValidator) throws Exception {
 
-        MockHttpServletRequestBuilder mockHttpServletRequestBuilder = MockMvcRequestBuilders.get("/prime/" + initial);
+        MockHttpServletRequestBuilder mockHttpServletRequestBuilder = MockMvcRequestBuilders.get("/primes/" + initial);
         if(strategy!=null){
             mockHttpServletRequestBuilder.header("strategy", strategy);
         }

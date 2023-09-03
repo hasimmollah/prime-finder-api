@@ -32,14 +32,14 @@ public class ApplicationResourcePoolConfiguration {
      * @return ThreadPoolTaskExecutor
      */
     @Bean(name = REQUEST_TASK_EXECUTOR)
-    public ThreadPoolTaskExecutor getRequestTaskExecutor() {
+    public ConcurrentTaskExecutor getRequestTaskExecutor() {
         final ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(requestTaskExecutorThreadPoolCoreSize);
         executor.setMaxPoolSize(requestTaskExecutorThreadPoolMaxSize);
         executor.setThreadNamePrefix(REQUEST_TASK_EXECUTOR);
         executor.setQueueCapacity(requestTaskExecutorThreadQueueCapacity);
         executor.initialize();
-        return executor;
+        return new ConcurrentTaskExecutor (executor);
     }
 
     /**
