@@ -7,10 +7,7 @@ spring:
 
 spring:
   profiles: development
-  
-security:
-  basic:
-    enabled: false
+
   
 # context Path
 server:

@@ -54,3 +54,12 @@ Supported value of 'strategy'
 Returned response is supported in 'json' and 'xml' format, which can be specified in request header as 
 - Accept:application/json
 - Accept:application/xml
+
+
+Sample curl commands
+- curl --location 'localhost:9080/prime-finder-api/v1.0/prime/10' \
+  --header 'Accept: application/json' \
+  --header 'strategy: SQUARE_ROOT'
+- curl --location 'localhost:9080/prime-finder-api/v1.0/prime/10' \
+  --header 'Accept: application/xml' \
+  --header 'strategy: TWO_TO_TEN_AND_PRIME'

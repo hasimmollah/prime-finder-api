@@ -3,10 +3,6 @@ spring:
     async:
       request-timeout: ${asyncRequestTimeout}
 
-security:
-  basic:
-    enabled: ${securityEnabled}
-
 # context Path
 server:
   servlet:
