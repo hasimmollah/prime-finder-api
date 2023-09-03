@@ -6,11 +6,26 @@ This is a rest api to find prime numbers for a given number.
 Swagger for this api is provided in 'output' directory as prime-finder-api.yml
 
 ## How to run
+The application needs java 17
 To run the application one can run 'prime-finder-api-0.0.1-SNAPSHOT.jar' present in 'output' folder with bellow commands
 - java -jar prime-finder-api-0.0.1-SNAPSHOT.jar
 - java -jar prime-finder-api-0.0.1-SNAPSHOT.jar conf.properties
 
 The jars also can be generated using 'mvn clean install', following which a prime-finder-api-0.0.1-SNAPSHOT.jar would be generated in target folder.
+
+The application can also be using docker.
+There is a Dockerfile present in 'output' directory
+
+Docker image can built using following command from terminal in 'output' directory
+docker image build -t  prime-finder-api:latest .
+
+built image can be run with following commands
+- docker run -p 9080:9080 prime-finder-api:latest
+- docker container run -p 9080:9080 prime-finder-api:latest
+- docker run -p 9080:9080 prime-finder-api:latest conf.properties
+- docker container run -p 9080:9080 prime-finder-api:latest conf.properties
+
+
 
 ## Internals
 
