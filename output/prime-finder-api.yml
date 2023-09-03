@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: Swagger Prime Finder - OpenAPI 3.0
+  description: |-
+    This is a primes finder app. Finding app prime numbers for a given initial.
+  version: 1.0.0
+servers:
+  - url: http://localhost:9080/prime-finder-api/v1.0
+tags:
+  - name: primes
+    description: Everything about primes
+    
+paths:
+  /prime/{initial}:
+    get:
+      tags:
+        - primes
+      summary: Get prime numbers for a given initial
+      description: Get prime numbers by a given initial
+      operationId: getPrimes
+      parameters:
+        - name: initial
+          in: path
+          description: Initial for which prime numbers has to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: strategy
+          in: header
+          description: Initial for which prime numbers has to return
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: SIEVE_OF_ERATOSTHENES
+            enum:
+              - BRUTE_FORCE
+              - SQUARE_ROOT
+              - SIEVE_OF_ERATOSTHENES
+              - TWO_TO_TEN_AND_PRIME
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPrimeResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GetPrimeResponse'
+        '400':
+          description: Invalid value for  initial
+        '404':
+          description: Not found
+    
+
+components:
+  schemas:
+    GetPrimeResponse:
+      type: object
+      properties:
+        Initial:
+          type: integer
+          format: int
+          example: 10
+        Primes:
+          type: array
+          xml:
+             name: Primes
+             wrapped: true
+          items:
+            type: integer
+            format: int
+            example: 
+              - 2
+              - 3
+              - 5
+              - 7
+            xml:
+             name: Prime
+             wrapped: true
+      xml:
+        name: GetPrimeResponse
+ 

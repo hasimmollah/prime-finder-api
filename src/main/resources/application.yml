@@ -9,6 +9,8 @@ security:
 
 # context Path
 server:
+  servlet:
+    context-path: /${context}/${version}
   port: ${serverPort}
 logging:
   level:
