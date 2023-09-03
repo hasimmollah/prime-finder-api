@@ -50,4 +50,4 @@ executor:
     primes:
       coreSize: 50
       maxSize: 70
-      queueCapacity: 100
+      queueCapacity: 10000

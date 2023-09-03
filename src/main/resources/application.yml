@@ -1,59 +1,31 @@
 spring:
-  profiles:
-    default: development
-    active: development 
-
----
-
-spring:
-  profiles: development
   mvc:
     async:
-      request-timeout: -1
-
+      request-timeout: ${asyncRequestTimeout}
 
 security:
   basic:
-    enabled: false
-  
-# context Path
-server:
-    port: 9080   
-       
----
-
-spring:
-  profiles: test
-  
-# context Path
-server:
-    port: 9080
-
----
-
-spring:
-  profiles: production
-  
-# context Path
-server:
-    port: 9080
-
----
-# common properties for yaml 
+    enabled: ${securityEnabled}
 
 # context Path
 server:
-      contextPath: /prime-finder-api/v1.0
-
-
+  port: ${serverPort}
+logging:
+  level:
+    root: ${logLevelRoot}
+    com:
+      nw: ${logLevelApp}
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 
 executor:
   threadpool:
     request:
-      coreSize: 50
-      maxSize: 70
-      queueSize: 100
+      coreSize: ${executorCoreSizeRequest}
+      maxSize: ${executorMaxSizeRequest}
+      queueSize: ${executorQueueSizeRequest}
     primes:
-      coreSize: 50
-      maxSize: 70
-      queueSize: 100
+      coreSize: ${executorCoreSizePrimes}
+      maxSize: ${executorMaxSizePrimes}
+      queueSize: ${executorQueueSizePrimes}
