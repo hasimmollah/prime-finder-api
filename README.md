@@ -5,14 +5,14 @@ This is a rest api to find prime numbers for a given number.
 
 Swagger for this api is provided in 'output' directory as prime-finder-api.yml
 
-##How to run
+## How to run
 To run the application one can run 'prime-finder-api-0.0.1-SNAPSHOT.jar' present in 'output' folder with bellow commands
 - java -jar prime-finder-api-0.0.1-SNAPSHOT.jar
 - java -jar prime-finder-api-0.0.1-SNAPSHOT.jar conf.properties
 
 The jars also can be generated using 'mvn clean install', following which a prime-finder-api-0.0.1-SNAPSHOT.jar would be generated in target folder.
 
-##Internals
+## Internals
 
 'conf.properties' contains application specific properties
 i.e. log level, application port etc, can be used for different intended environments. If no 'conf.properties' is provided default conf.properties for development environment would be used
